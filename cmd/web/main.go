@@ -8,6 +8,7 @@ import (
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/{$}", home)
+	mux.HandleFunc("/collection", collection)
 
 	log.Println("starting server on :4000")
 	err := http.ListenAndServe(":4000", mux)
