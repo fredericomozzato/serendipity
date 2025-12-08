@@ -61,6 +61,24 @@ func history(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func mixes(w http.ResponseWriter, r *http.Request) {
+	files := []string{
+		"./ui/html/layout.html",
+		"./ui/html/partials/navbar.html",
+		"./ui/html/pages/mixes.html",
+	}
+
+	template, err := template.ParseFiles(files...)
+	if err != nil {
+		handleInternalError(w, err)
+	}
+
+	err = template.ExecuteTemplate(w, "layout", nil)
+	if err != nil {
+		handleInternalError(w, err)
+	}
+}
+
 func handleInternalError(w http.ResponseWriter, err error) {
 	log.Println(err)
 	http.Error(w, err.Error(), http.StatusInternalServerError)
