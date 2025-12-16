@@ -4,5 +4,8 @@ db_run:
 db_stop:
 	docker compose down
 
-db_connect:
-	docker compose exec db mysql -p
+db_root_connect:
+	docker compose exec db mysql -u root -p
+
+db_web_connect:
+	docker compose exec db mysql -u web -p

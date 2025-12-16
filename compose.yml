@@ -4,7 +4,10 @@ services:
     ports:
       - 3306:3306
     environment:
-        MYSQL_ROOT_PASSWORD: serendipity
+      MYSQL_DATABASE: serendipity
+      MYSQL_ROOT_PASSWORD: serendipity
+      MYSQL_USER: web
+      MYSQL_PASSWORD: password
     volumes:
       - db_data:/var/lib/mysql
 
