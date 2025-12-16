@@ -1,2 +1,4 @@
-github.com/fredericomozzato/discogs_client v0.0.0-20251206202717-3ba689c4bfac h1:9gSfpUCjo5sYE3tF7OhDvOWPHa4oMJ9An2ohG2n7wU0=
-github.com/fredericomozzato/discogs_client v0.0.0-20251206202717-3ba689c4bfac/go.mod h1:8N9PEvIwf22C4pOWOJzeKw63COSYpBL2f1fW61z6ZrU=
+filippo.io/edwards25519 v1.1.0 h1:FNf4tywRC1HmFuKW5xopWpigGjJKiJSV0Cqo0cJWDaA=
+filippo.io/edwards25519 v1.1.0/go.mod h1:BxyFTGdWcka3PhytdK4V28tE5sGfRvvvRV7EaN4VDT4=
+github.com/go-sql-driver/mysql v1.9.3 h1:U/N249h2WzJ3Ukj8SowVFjdtZKfu9vlLZxjPXV1aweo=
+github.com/go-sql-driver/mysql v1.9.3/go.mod h1:qn46aNg1333BRMNU69Lq93t8du/dwxI64Gl8i5p1WMU=
