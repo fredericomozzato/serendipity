@@ -1,15 +1,14 @@
 services:
   db:
-    image: mysql:9
+    image: postgres:18
     ports:
-      - 3306:3306
+      - 5432:5432
     environment:
-      MYSQL_DATABASE: serendipity
-      MYSQL_ROOT_PASSWORD: serendipity
-      MYSQL_USER: web
-      MYSQL_PASSWORD: password
+      POSTGRES_USER: serendipity
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: serendipity
     volumes:
-      - db_data:/var/lib/mysql
+      - pgdata:/var/lib/postgresql
 
 volumes:
-  db_data:
+  pgdata:

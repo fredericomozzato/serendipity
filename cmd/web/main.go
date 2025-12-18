@@ -1,25 +1,19 @@
 package main
 
 import (
-	"database/sql"
+	"context"
 	"log"
 	"net/http"
 
-	_ "github.com/go-sql-driver/mysql"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 func main() {
-	dsn := "web:password@tcp(localhost:3306)/serendipity?parseTime=true"
-	db, err := sql.Open("mysql", dsn)
+	dsn := "postgres://serendipity:password@localhost:5432/serendipity"
+	db, err := pgxpool.New(context.Background(), dsn)
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = db.Ping()
-	if err != nil {
-		log.Fatal(err)
-		db.Close()
-	}
-
 	defer db.Close()
 
 	mux := http.NewServeMux()
