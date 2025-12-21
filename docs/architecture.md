@@ -26,13 +26,10 @@
 
 ## 1. Introduction and Goals
 
-### 1.1 Requirements Overview
-
-**What is Serendipity?**
+### What is Serendipity?
 >[!quote]
 >The ability to find valuable or agreeable things not sought for.
->
->[Merriam-Webster](https://www.merriam-webster.com/dictionary/serendipity)
+>[Merriam-Webster's definition](https://www.merriam-webster.com/dictionary/serendipity)
 
 Serendipity is a random music discovery app built without any recommendation
 algorithm. The song selection is purely random and the users may expect
@@ -60,27 +57,31 @@ mixes/collections, adding a social aspect to the application.
 
 ## 2. Constraints
 
-### 2.1 Technical Constraints
+### Language
+Serendipity will be implemented in Golang since this is a great language to
+handle web services and allows the app to be fast with its asynchronous
+capabilities. This is also a study project to help me, as a developer, learn
+the language and build portfolio in it.
 
-
-**Language**
-Serendipity will be implemented in Golang since this is a great language to handle web services and allows the app to be fast with its asynchronous capabilities. This is also a study project to help me, as a developer, learn the language and build portfolio in it.
-
-**Architecture**
+### Architecture
 The application will be divided in three main services:
 
 1. The web server
 2. The download service
 3. The notification service
 
-This choice is done to help separate the concerns, increase isolation and help me learn the micro service paradigm with a real project.
+This choice is done to help separate the concerns, increase isolation and help
+me learn the micro service paradigm with a real project.
 
 The app will be backed by the [Discogs
 API](https://www.discogs.com/developers). The music data will be all fetched
 from this open and free database with millions of artists and songs. So we'll
 be limited to their catalogue.
 
-One important consideration to make is that we'll be doing Server Side Rendering in the web server so we can focus as much as possible in building the backend (which is the maind focus on this project) while not having to maintain a second Javascript application.
+One important consideration to make is that we'll be doing Server Side
+Rendering in the web server so we can focus as much as possible in building the
+backend (which is the maind focus on this project) while not having to maintain
+a second Javascript application.
 
 The same constraint (the focus on backend) will mean that the front end design
 and implementation will have massive help from AI tools, adding another layer
@@ -88,8 +89,7 @@ for learning on prototyping and using AI coding agents to get things done. The
 initial idea is to use [Lovable](https://lovable.dev/) and [Claude Code](https://claude.com/product/claude-code) for this task.
 
 
-### 2.2 Organizational Constraints
-**Timeline**
+### Timeline
 This application doesn't have a hard delivery date, but the initial estimative
 is to be able to ship its core functionalities (song recommendation, history
 and playlist creation) in 2026 first quarter.
@@ -97,41 +97,40 @@ and playlist creation) in 2026 first quarter.
 The download and email features will be implemented after the core is ready and
 running.
 
-**Team**
+### Team
 This is a solo project. I'll be the only developer and I'll be using AI tools
 to help me with the parts that are not the learning focus (frontend).
 
 I'll be tasked on building the backend and project's infrastructure.
 
-**Budget**
+### Budget
 Since this is a passion project aimed for learning I expect to not spend too
 much money on it initially. I'll need to manage cloud and domain costs that I
 intend on keeping below U$ 20.00 per month.
 
-**Deployment**
+### Deployment
 The application will run on AWS.
 
 ## 3. System Context
+![C4 diagram level 1 - context](./diagrams/serendipity_context.jpg)
 
-### 3.1 Business Context
-
-**Context diagram**
-![image](./diagrams/serendipity_context.png)
-
-**[Paste C4 Level 1 diagram here once you draw it]**
-
+### 3.1 Users
 Serendipity will allow both anonymous and authenticated users to access the
 service. No one will *need* to make an account to use the application but the
 scope will be different for each type of user.
 
-**Anonymous users**
-Can access the application through the web. Will be able to use the player, filter results and play tracks.
+#### Anonymous users
+Can access the application through the web. Will be able to use the player,
+filter results and play tracks.
 
-**Authenticated users**
-Will access the app the same way as anonymous users and have all the same capabilites plus being able to view and manage their listening history, liking songs to add them to their collection, creating and sharing mixes and downloading songs.
+#### Authenticated users
+Will access the app the same way as anonymous users and have all the same
+capabilites plus being able to view and manage their listening history, liking
+songs to add them to their collection, creating and sharing mixes and
+downloading songs.
 
-#### External Entities:
-**Discogs API**
+### 3.2 External Entities:
+#### Discogs API
 As mentioned, the main dependency is the Discogs API. This is the music
 catalogue that Serendipity will drink from, fetching release data from it and
 displaying it in the player.
@@ -140,22 +139,21 @@ The Discogs API returns results that have embedded Youtube video links. We'll
 use these links to render the Youtube player so the users can listen to the
 songs.
 
-**AWS**
-The application will run on AWS and we'll use S3 to store the downloaded files to serve back to users. The files will be periodically cleaned up using S3 lifecycle policies.
+#### AWS
+The application will be deployed to AWS in a EC2 instance. We'll also use more
+services from the cloud provider.
 
-### 3.2 Technical Context
+##### S3
+Will be used to store extracted audio files for user's download. The files will
+be available for a period of 48 hours before automatic cleanup using S3
+lifecycle policies.
 
-**Communication Channels:**
+##### SES
+The download links will be sent to the users using the AWS SES. Users will
+receive the email as soon as the audio file is uploaded to the S3 service. The
+email will contain a link and a note about the expiration date. Users will be
+able to directly download the mp3 from the link.
 
-[For each connection in your context diagram, describe the protocol]
-
-| Channel | Technology | Purpose |
-|---------|-----------|---------|
-| User ↔ Main Server | [Protocol?] | [Why?] |
-| Main Server ↔ PostgreSQL | [Protocol?] | [Why?] |
-| ... | ... | ... |
-
----
 
 ## 4. Solution Strategy
 
@@ -163,58 +161,57 @@ The application will run on AWS and we'll use S3 to store the downloaded files t
 
 [For each major technology choice, write a paragraph explaining WHY]
 
-**Go:**
-[Why Go for all services? What does it give you?]
+#### Golang
+The main programming language chosen is Go. This has two reasons:
 
-**Microservices architecture:**
-[Why 3 services instead of monolith? What are the benefits for YOUR specific case?]
+1. This is a project to help learn and create portfolio in Golang.
+2. Go is a great language to build web servers for its concurrent capabilities.
 
-**PostgreSQL:**
-[Why Postgres over MySQL? What features do you need?]
+#### Microservices architecture
+The choice to split the application in services has to do with my need to learn
+and implement this microservice patterns, since I'm a Ruby on Rails developer
+and I'm very familiar with monolithic application.
 
-**RabbitMQ:**
-[Why RabbitMQ over NATS or other queues? What guarantees do you need?]
+#### PostgreSQL
+As the industry standard database I chose to use it for it's JSON support
+(since we'll be working extensively with external API data in this format).
 
-**Server-Side Rendering:**
-[Why SSR instead of React/SPA? What's the trade-off?]
+#### RabbitMQ
+The download and email services will work as background job workers. RabbitMQ
+seems to be the industry standard for job processing with robust retry logic,
+allowing us to ensure the downloads will be completed and delivered to users
+even if there are errors in the way.
 
-### 4.2 Architecture Patterns
-
-[What patterns are you using? Explain each in 2-3 sentences]
-
-**Event-Driven Architecture:**
-[How do services communicate? Why async?]
-
-**Event-Carried State Transfer:**
-[What data is in events? Why not query databases?]
-
-**Worker Pool Pattern:**
-[How does download service work? Why fixed pool?]
-
-**Repository Pattern:**
-[How do you abstract database access? Why?]
-
----
+#### Server-Side Rendering
+The server will do SSR so I don't have to maintain a second Javascript
+application (as this is out of this project's scope).
 
 ## 5. Building Block View
 
 ### 5.1 Level 1: System Overview (Container Level)
 
-**[Paste C4 Level 2 Container diagram here once you draw it]**
+![Containers diagram](./diagrams/serendipity_containers.png)
 
-**Containers:**
+#### Web server
+test test test, this is a tess is a test. This iseems nice, it seems to change colours does it?this isthis one does use orange and pinkthis is all rgb, i dont like ho it this 
 
-[List every deployable unit in your system]
 
-| Container | Responsibility | Technology |
-|-----------|---------------|------------|
-| Main Web Server | [What does it do?] | [Tech stack] |
-| PostgreSQL | [What's stored?] | [Version] |
-| RabbitMQ | [What queues exist?] | [Version] |
-| ... | ... | ... |
+#### Downloads service
+
+
+#### Notifications service
+
+
+#### Database (PostgreSQL)
+
+
+#### Message broker (RabbitMQ)
+
+
+#### Object storage system (Amazon S3)
+
 
 ### 5.2 Level 2: Main Web Server (Component Level)
-
 **[Paste Main Server component diagram here once you draw it]**
 
 **Purpose:** [1-2 sentence description]
@@ -379,6 +376,7 @@ Main Server → User: [Render HTML with ?]
 
 **Authentication:**
 [How do users log in? What's the flow?]
+Users will only be able to log in with oAuth. I don't want to store passwords. (maybe use magic links?)
 
 **Authorization:**
 [How do you check permissions?]
