@@ -4,12 +4,17 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 func main() {
-	dsn := "postgres://serendipity:password@localhost:5432/serendipity"
+	dsn := os.Getenv("DB_DSN")
+	if dsn == "" {
+		log.Fatal("Database URL environment variable is required")
+	}
+
 	db, err := pgxpool.New(context.Background(), dsn)
 	if err != nil {
 		log.Fatal(err)

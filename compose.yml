@@ -1,14 +1,40 @@
 services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/tmp
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - serendipity-network
+
   db:
     image: postgres:18
     ports:
       - 5432:5432
-    environment:
-      POSTGRES_USER: serendipity
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: serendipity
+    env_file:
+      - .env
     volumes:
-      - pgdata:/var/lib/postgresql
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - serendipity-network
 
 volumes:
   pgdata:
+
+networks:
+  serendipity-network:
+    driver: bridge

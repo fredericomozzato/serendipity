@@ -1,1 +1,4 @@
 tmp
+
+# Environment files with sensitive data
+*.env

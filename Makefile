@@ -1,8 +1,20 @@
-db_run:
+up:
 	docker compose up -d
 
-db_stop:
+down:
 	docker compose down
 
-db_connect:
+logs:
+	docker compose logs -f
+
+logs-web:
+	docker compose logs -f web
+
+logs-db:
+	docker compose logs -f db
+
+rebuild:
+	docker compose up -d --build
+
+db-connect:
 	docker compose exec db psql -h localhost -U serendipity -d serendipity -W

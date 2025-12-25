@@ -1,0 +1,26 @@
+# Git
+.git
+.gitignore
+
+# Temporary files
+tmp/
+*.log
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation (not needed in container)
+*.md
+docs/
+
+# Local development files
+.env.local
+.env.*.local
