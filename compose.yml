@@ -11,30 +11,30 @@ services:
       - .:/app
       - /app/tmp
     depends_on:
-      db:
+      serendipity_db:
         condition: service_healthy
     networks:
-      - serendipity-network
+      - serendipity_network
 
-  db:
+  serendipity_db:
     image: postgres:18
     ports:
       - 5432:5432
     env_file:
       - .env
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 5s
       timeout: 5s
       retries: 5
     networks:
-      - serendipity-network
+      - serendipity_network
 
 volumes:
   pgdata:
 
 networks:
-  serendipity-network:
+  serendipity_network:
     driver: bridge
