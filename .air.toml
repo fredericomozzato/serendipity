@@ -14,7 +14,7 @@ tmp_dir = "tmp"
   exclude_regex = ["_test.go"]
   exclude_unchanged = false
   follow_symlink = false
-  full_bin = ""
+  full_bin = "./tmp/main -addr=$SERVER_PORT -dsn=$DB_DSN"
   include_dir = []
   include_ext = ["go", "tpl", "tmpl", "html"]
   include_file = []

@@ -2,20 +2,23 @@ package main
 
 import (
 	"context"
+	"flag"
+	"fmt"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 func main() {
-	dsn := os.Getenv("DB_DSN")
-	if dsn == "" {
-		log.Fatal("Database URL environment variable is required")
-	}
+	addr := flag.String("addr", "4000", "Network port to access the app. Defaults to 4000")
+	dsn := flag.String("dsn", "", "Data Source Name")
 
-	db, err := pgxpool.New(context.Background(), dsn)
+	flag.Parse()
+
+	serverAddr := ":" + *addr
+
+	db, err := pgxpool.New(context.Background(), *dsn)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,7 +30,7 @@ func main() {
 	mux.HandleFunc("/history", history)
 	mux.HandleFunc("/mixes", mixes)
 
-	log.Println("starting server on :4000")
-	err = http.ListenAndServe(":4000", mux)
+	log.Println(fmt.Sprintf("starting server at %s", serverAddr))
+	err = http.ListenAndServe(serverAddr, mux)
 	log.Fatal(err)
 }
