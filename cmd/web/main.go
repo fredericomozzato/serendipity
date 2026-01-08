@@ -3,34 +3,50 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"
-	"log"
+	"log/slog"
 	"net/http"
+	"os"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
+type application struct {
+	logger *slog.Logger
+}
+
 func main() {
-	addr := flag.String("addr", "4000", "Network port to access the app. Defaults to 4000")
+	port := flag.String("port", "4000", "Network port to access the app. Defaults to 4000")
 	dsn := flag.String("dsn", "", "Data Source Name")
 
 	flag.Parse()
 
-	serverAddr := ":" + *addr
+	serverAddr := ":" + *port
+
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+		// keeping the default options explicit
+		Level:     slog.LevelInfo,
+		AddSource: false,
+	}))
 
 	db, err := pgxpool.New(context.Background(), *dsn)
 	if err != nil {
-		log.Fatal(err)
+		logger.Error(err.Error())
+		os.Exit(1)
 	}
 	defer db.Close()
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("/{$}", home)
-	mux.HandleFunc("/collection", collection)
-	mux.HandleFunc("/history", history)
-	mux.HandleFunc("/mixes", mixes)
+	app := &application{
+		logger: logger,
+	}
 
-	log.Println(fmt.Sprintf("starting server at %s", serverAddr))
+	mux := http.NewServeMux()
+	mux.HandleFunc("/{$}", app.home)
+	mux.HandleFunc("/collection", app.collection)
+	mux.HandleFunc("/history", app.history)
+	mux.HandleFunc("/mixes", app.mixes)
+
+	app.logger.Info("starting server", slog.String("port", serverAddr))
 	err = http.ListenAndServe(serverAddr, mux)
-	log.Fatal(err)
+	app.logger.Error(err.Error())
+	os.Exit(1)
 }
