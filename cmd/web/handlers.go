@@ -3,6 +3,8 @@ package main
 import (
 	"net/http"
 	"text/template"
+
+	_ "github.com/fredericomozzato/discogs_client"
 )
 
 func (a *application) home(w http.ResponseWriter, r *http.Request) {
