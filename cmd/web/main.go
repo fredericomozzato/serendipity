@@ -22,7 +22,11 @@ func main() {
 
 	serverAddr := ":" + *port
 
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+		// keeping the default options explicit
+		Level:     slog.LevelInfo,
+		AddSource: false,
+	}))
 
 	db, err := pgxpool.New(context.Background(), *dsn)
 	if err != nil {
@@ -36,10 +40,10 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/{$}", home)
-	mux.HandleFunc("/collection", collection)
-	mux.HandleFunc("/history", history)
-	mux.HandleFunc("/mixes", mixes)
+	mux.HandleFunc("/{$}", app.home)
+	mux.HandleFunc("/collection", app.collection)
+	mux.HandleFunc("/history", app.history)
+	mux.HandleFunc("/mixes", app.mixes)
 
 	app.logger.Info("starting server", slog.String("port", serverAddr))
 	err = http.ListenAndServe(serverAddr, mux)

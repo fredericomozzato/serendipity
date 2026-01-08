@@ -1,12 +1,11 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"text/template"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
+func (a *application) home(w http.ResponseWriter, r *http.Request) {
 	files := []string{
 		"./ui/html/layout.html",
 		"./ui/html/partials/navbar.html",
@@ -16,16 +15,16 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 	template, err := template.ParseFiles(files...)
 	if err != nil {
-		handleInternalError(w, err)
+		a.handleInternalError(w, err)
 	}
 
 	err = template.ExecuteTemplate(w, "layout", nil)
 	if err != nil {
-		handleInternalError(w, err)
+		a.handleInternalError(w, err)
 	}
 }
 
-func collection(w http.ResponseWriter, r *http.Request) {
+func (a *application) collection(w http.ResponseWriter, r *http.Request) {
 	files := []string{
 		"./ui/html/layout.html",
 		"./ui/html/partials/navbar.html",
@@ -34,16 +33,16 @@ func collection(w http.ResponseWriter, r *http.Request) {
 
 	template, err := template.ParseFiles(files...)
 	if err != nil {
-		handleInternalError(w, err)
+		a.handleInternalError(w, err)
 	}
 
 	err = template.ExecuteTemplate(w, "layout", nil)
 	if err != nil {
-		handleInternalError(w, err)
+		a.handleInternalError(w, err)
 	}
 }
 
-func history(w http.ResponseWriter, r *http.Request) {
+func (a *application) history(w http.ResponseWriter, r *http.Request) {
 	files := []string{
 		"./ui/html/layout.html",
 		"./ui/html/partials/navbar.html",
@@ -52,16 +51,16 @@ func history(w http.ResponseWriter, r *http.Request) {
 
 	template, err := template.ParseFiles(files...)
 	if err != nil {
-		handleInternalError(w, err)
+		a.handleInternalError(w, err)
 	}
 
 	err = template.ExecuteTemplate(w, "layout", nil)
 	if err != nil {
-		handleInternalError(w, err)
+		a.handleInternalError(w, err)
 	}
 }
 
-func mixes(w http.ResponseWriter, r *http.Request) {
+func (a *application) mixes(w http.ResponseWriter, r *http.Request) {
 	files := []string{
 		"./ui/html/layout.html",
 		"./ui/html/partials/navbar.html",
@@ -70,16 +69,16 @@ func mixes(w http.ResponseWriter, r *http.Request) {
 
 	template, err := template.ParseFiles(files...)
 	if err != nil {
-		handleInternalError(w, err)
+		a.handleInternalError(w, err)
 	}
 
 	err = template.ExecuteTemplate(w, "layout", nil)
 	if err != nil {
-		handleInternalError(w, err)
+		a.handleInternalError(w, err)
 	}
 }
 
-func handleInternalError(w http.ResponseWriter, err error) {
-	log.Println(err)
+func (a *application) handleInternalError(w http.ResponseWriter, err error) {
+	a.logger.Error(err.Error())
 	http.Error(w, err.Error(), http.StatusInternalServerError)
 }
