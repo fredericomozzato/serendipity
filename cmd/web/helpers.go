@@ -27,4 +27,16 @@ func (a *application) internalServerError(w http.ResponseWriter, r *http.Request
 	)
 }
 
-// TODO: implement clientError to handle user input errors
+// NOTE: do we need the request as parameter?
+func (a *application) clientError(w http.ResponseWriter, status int, err error) {
+	a.logger.Error(
+		err.Error(),
+		slog.String("status", http.StatusText(status)),
+	)
+
+	http.Error(
+		w,
+		http.StatusText(status),
+		status,
+	)
+}
