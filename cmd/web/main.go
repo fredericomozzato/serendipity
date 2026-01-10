@@ -40,13 +40,7 @@ func main() {
 
 	// TODO: set the DB pool in the app struct
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("/{$}", app.home)
-	mux.HandleFunc("/collection", app.collection)
-	mux.HandleFunc("/history", app.history)
-	mux.HandleFunc("/mixes", app.mixes)
-
 	app.logger.Info("starting server", slog.String("port", serverAddr))
-	err = http.ListenAndServe(serverAddr, mux)
+	err = http.ListenAndServe(serverAddr, app.routes())
 	app.serverError(err)
 }
