@@ -28,16 +28,17 @@ func main() {
 		AddSource: false,
 	}))
 
-	db, err := pgxpool.New(context.Background(), *dsn)
-	if err != nil {
-		logger.Error(err.Error())
-		os.Exit(1)
-	}
-	defer db.Close()
-
 	app := &application{
 		logger: logger,
 	}
+
+	db, err := pgxpool.New(context.Background(), *dsn)
+	if err != nil {
+		app.serverError(err)
+	}
+	defer db.Close()
+
+	// TODO: set the DB pool in the app struct
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/{$}", app.home)
@@ -47,6 +48,5 @@ func main() {
 
 	app.logger.Info("starting server", slog.String("port", serverAddr))
 	err = http.ListenAndServe(serverAddr, mux)
-	app.logger.Error(err.Error())
-	os.Exit(1)
+	app.serverError(err)
 }
