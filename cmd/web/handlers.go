@@ -17,12 +17,12 @@ func (a *application) home(w http.ResponseWriter, r *http.Request) {
 
 	template, err := template.ParseFiles(files...)
 	if err != nil {
-		a.handleInternalError(w, err)
+		a.internalServerError(w, r, err)
 	}
 
 	err = template.ExecuteTemplate(w, "layout", nil)
 	if err != nil {
-		a.handleInternalError(w, err)
+		a.internalServerError(w, r, err)
 	}
 }
 
@@ -35,12 +35,12 @@ func (a *application) collection(w http.ResponseWriter, r *http.Request) {
 
 	template, err := template.ParseFiles(files...)
 	if err != nil {
-		a.handleInternalError(w, err)
+		a.internalServerError(w, r, err)
 	}
 
 	err = template.ExecuteTemplate(w, "layout", nil)
 	if err != nil {
-		a.handleInternalError(w, err)
+		a.internalServerError(w, r, err)
 	}
 }
 
@@ -53,12 +53,12 @@ func (a *application) history(w http.ResponseWriter, r *http.Request) {
 
 	template, err := template.ParseFiles(files...)
 	if err != nil {
-		a.handleInternalError(w, err)
+		a.internalServerError(w, r, err)
 	}
 
 	err = template.ExecuteTemplate(w, "layout", nil)
 	if err != nil {
-		a.handleInternalError(w, err)
+		a.internalServerError(w, r, err)
 	}
 }
 
@@ -71,16 +71,11 @@ func (a *application) mixes(w http.ResponseWriter, r *http.Request) {
 
 	template, err := template.ParseFiles(files...)
 	if err != nil {
-		a.handleInternalError(w, err)
+		a.internalServerError(w, r, err)
 	}
 
 	err = template.ExecuteTemplate(w, "layout", nil)
 	if err != nil {
-		a.handleInternalError(w, err)
+		a.internalServerError(w, r, err)
 	}
-}
-
-func (a *application) handleInternalError(w http.ResponseWriter, err error) {
-	a.logger.Error(err.Error())
-	http.Error(w, err.Error(), http.StatusInternalServerError)
 }
