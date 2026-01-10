@@ -1,0 +1,12 @@
+BEGIN;
+
+CREATE TABLE releases (
+	id SERIAL PRIMARY KEY,
+	title TEXT NOT NULL,
+	year INTEGER NOT NULL,
+	country TEXT NOT NULL,
+	uri TEXT NOT NULL UNIQUE,
+	created_at TIMESTAMPTZ DEFAULT now()
+);
+
+COMMIT;

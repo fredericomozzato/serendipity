@@ -1,0 +1,10 @@
+BEGIN;
+
+CREATE TABLE artists (
+	id SERIAL PRIMARY KEY,
+	name TEXT NOT NULL,
+	url TEXT NOT NULL UNIQUE,
+	created_at TIMESTAMPTZ DEFAULT now()
+);
+
+COMMIT;

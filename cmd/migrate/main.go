@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"
 	"log"
 
 	"github.com/golang-migrate/migrate/v4"
@@ -43,9 +42,13 @@ func main() {
 		log.Fatalf("unknown direction: %s", direction)
 	}
 
-	if err != nil && err != migrate.ErrNoChange {
+	if err != nil {
+		if err == migrate.ErrNoChange {
+			log.Println("All migrations already applied")
+			return
+		}
 		log.Fatal(err)
 	}
 
-	fmt.Println("Migration completed:", direction)
+	log.Println("Migration completed:", direction)
 }

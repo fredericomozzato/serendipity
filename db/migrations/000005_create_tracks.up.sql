@@ -1,0 +1,12 @@
+BEGIN;
+
+CREATE TABLE tracks (
+	id SERIAL PRIMARY KEY,
+	duration TEXT NOT NULL,
+	postition TEXT NOT NULL,
+	title TEXT NOT NULL,
+	type TEXT NOT NULL,
+	created_at TIMESTAMPTZ DEFAULT now()
+);
+
+COMMIT;
