@@ -96,15 +96,15 @@
 | UI-02 | Phase 4 | Pending |
 | UI-03 | Phase 2 | Pending |
 | UI-04 | Phase 2 | Pending |
-| QUAL-01 | All phases | Pending |
-| QUAL-02 | All phases | Pending |
+| QUAL-01 | All phases (cross-cutting) | Pending |
+| QUAL-02 | All phases (cross-cutting) | Pending |
 | QUAL-03 | Phase 2 | Pending |
 
 **Coverage:**
 - v1 requirements: 20 total
 - Mapped to phases: 20
-- Unmapped: 0 ✓
+- Unmapped: 0 (QUAL-01 and QUAL-02 are cross-cutting constraints applied in every phase)
 
 ---
 *Requirements defined: 2026-03-31*
-*Last updated: 2026-03-31 after initial definition*
+*Last updated: 2026-03-31 after roadmap creation*
