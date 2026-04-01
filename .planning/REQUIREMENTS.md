@@ -40,8 +40,7 @@
 ### Quality
 
 - [ ] **QUAL-01**: All domain logic has RSpec test coverage written before implementation (TDD)
-- [ ] **QUAL-02**: All domain logic lives in service objects — controllers contain no business logic — enabling full `mutant` gem coverage
-- [ ] **QUAL-03**: Discogs API client handles rate limiting and transient errors with a retry strategy
+- [ ] **QUAL-02**: Discogs API client handles rate limiting and transient errors with a retry strategy
 
 ## v2 Requirements
 
@@ -66,6 +65,7 @@
 
 | Feature | Reason |
 |---------|--------|
+| mutant gem / mutation testing | Applied as a dedicated future milestone after V1 ships — not a V1 constraint |
 | Volume control | YouTube embed + OS/browser handle volume; in-app control adds no value |
 | Playlists / queue | Inverts the product's serendipity identity; skip IS the queue |
 | Social features (share, vote, collaborative) | Requires real-time infra (Action Cable/Redis) not in V1 stack |
@@ -97,13 +97,12 @@
 | UI-03 | Phase 2 | Pending |
 | UI-04 | Phase 2 | Pending |
 | QUAL-01 | All phases (cross-cutting) | Pending |
-| QUAL-02 | All phases (cross-cutting) | Pending |
-| QUAL-03 | Phase 2 | Pending |
+| QUAL-02 | Phase 2 | Pending |
 
 **Coverage:**
-- v1 requirements: 20 total
-- Mapped to phases: 20
-- Unmapped: 0 (QUAL-01 and QUAL-02 are cross-cutting constraints applied in every phase)
+- v1 requirements: 19 total
+- Mapped to phases: 19
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-31*

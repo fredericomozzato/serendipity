@@ -2,7 +2,7 @@
 
 ## Overview
 
-Serendipity is built in four phases that flow from the dependency graph. Phase 1 establishes the Docker + Rails skeleton — the mutation-testing-ready architecture and Docker gem volumes must be correct before any business logic is written. Phase 2 delivers the entire value proposition: a song plays within seconds of opening the app, with metadata, autoplay compliance, and a resilient retry loop. Phase 3 adds the navigation and discovery controls that make the app usable beyond the first listen. Phase 4 layers the retro/neon aesthetic that turns a functional app into a portfolio piece. QUAL-01 (TDD) and QUAL-02 (service-object architecture) are cross-cutting constraints applied in every phase, not a phase of their own.
+Serendipity is built in four phases that flow from the dependency graph. Phase 1 establishes the Docker + Rails skeleton — Docker gem volumes and the Rails + RSpec setup must be correct before any business logic is written. Phase 2 delivers the entire value proposition: a song plays within seconds of opening the app, with metadata, autoplay compliance, and a resilient retry loop. Phase 3 adds the navigation and discovery controls that make the app usable beyond the first listen. Phase 4 layers the retro/neon aesthetic that turns a functional app into a portfolio piece. QUAL-01 (TDD) is a cross-cutting constraint applied in every phase, not a phase of its own.
 
 ## Phases
 
@@ -20,23 +20,22 @@ Decimal phases appear between their surrounding integers in numeric order.
 ## Phase Details
 
 ### Phase 1: Infrastructure and Skeleton
-**Goal**: Developer can `docker compose up` and hit a running Rails 8 app where `rspec` passes and `mutant` reports subjects (not zero)
+**Goal**: Developer can `docker compose up` and hit a running Rails 8 app where `rspec` passes
 **Depends on**: Nothing (first phase)
 **Requirements**: INFRA-01, INFRA-02, INFRA-03
-**Cross-cutting**: QUAL-01 (TDD from first commit), QUAL-02 (service-object structure established)
+**Cross-cutting**: QUAL-01 (TDD from first commit)
 **Success Criteria** (what must be TRUE):
   1. `docker compose up` starts the Rails app with no manual steps; the app responds at localhost
   2. `bundle exec rspec` runs inside the container and exits green
-  3. `bundle exec mutant run` reports at least one subject (not zero — mutant load path is correctly configured)
-  4. Docker Compose file contains a commented `db` service and a `DATABASE_URL` env var that require zero code changes to activate for V2
-  5. All V1 state flows through Rails session (CookieStore) — no database queries are made anywhere in the app
+  3. Docker Compose file contains a commented `db` service and a `DATABASE_URL` env var that require zero code changes to activate for V2
+  4. All V1 state flows through Rails session (CookieStore) — no database queries are made anywhere in the app
 **Plans**: TBD
 
 ### Phase 2: Core Playback Loop
 **Goal**: Users experience the core value — a YouTube video of a random Discogs release starts playing automatically within seconds of opening the app
 **Depends on**: Phase 1
-**Requirements**: PLAY-01, PLAY-02, PLAY-03, PLAY-04, PLAY-05, UI-03, UI-04, QUAL-03
-**Cross-cutting**: QUAL-01 (all domain logic TDD), QUAL-02 (no logic in controllers)
+**Requirements**: PLAY-01, PLAY-02, PLAY-03, PLAY-04, PLAY-05, UI-03, UI-04, QUAL-02
+**Cross-cutting**: QUAL-01 (TDD)
 **Success Criteria** (what must be TRUE):
   1. Opening the app on a fresh browser tab starts a YouTube video playing within ~2 seconds, without any user interaction
   2. The video plays on iOS Safari without requiring an unmute gesture (muted autoplay with `playsinline=1`)
@@ -49,7 +48,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Goal**: Users can steer their discovery session — skipping forward, stepping back, and constraining by genre or decade — all without a page reload
 **Depends on**: Phase 2
 **Requirements**: NAV-01, NAV-02, DISC-01, DISC-02, DISC-03
-**Cross-cutting**: QUAL-01 (TDD), QUAL-02 (History service objects)
+**Cross-cutting**: QUAL-01 (TDD)
 **Success Criteria** (what must be TRUE):
   1. Tapping Skip replaces the player with a new random song (no full page reload; Turbo Stream swap)
   2. Tapping Back navigates to the previously played song; the Back button is disabled on the first song of the session
@@ -62,7 +61,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Goal**: The app looks and feels like a deliberate design artifact — neon-on-dark retro aesthetic, mobile-first layout with thumb-zone controls, and a fully usable desktop experience
 **Depends on**: Phase 3
 **Requirements**: UI-01, UI-02
-**Cross-cutting**: QUAL-01, QUAL-02 (no regressions)
+**Cross-cutting**: QUAL-01 (no regressions)
 **Success Criteria** (what must be TRUE):
   1. The app renders with a dark background, neon accent colors, and vintage typography (VT323 or Press Start 2P) on all viewports
   2. All primary controls (Skip, Back, genre/decade filters) have touch targets of at least 48×48px and are reachable in the bottom half of the viewport on a 375px-wide mobile screen

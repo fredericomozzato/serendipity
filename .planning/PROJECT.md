@@ -24,7 +24,7 @@ A song is always playing within seconds of opening the app.
 - [ ] Genre filter UI lets users pick from the full Discogs genre taxonomy (~13 genres)
 - [ ] When a genre is active, random songs are constrained to that genre
 - [ ] Mobile-first layout with retro-inspired aesthetic (neon on dark, vintage typography)
-- [ ] Full RSpec test suite following TDD — mutation-testing-ready with the `mutant` gem
+- [ ] Full RSpec test suite following TDD
 
 ### Out of Scope
 
@@ -40,7 +40,7 @@ A song is always playing within seconds of opening the app.
 - **Discogs Search API randomness:** Fetch total result count → generate random page number → pick random item from page. Add `&genre=X` for genre filtering — same logic, no architectural change.
 - **YouTube coverage:** Discogs `videos` field is present on a subset of releases (~20–40%). Strategy: silent retry until a release with a video is found.
 - **Discogs API auth:** Owner has a personal API token (3× rate limit vs. unauthenticated).
-- **Mutation testing:** Codebase will be the subject of a public article series on mutation testing with the `mutant` gem. Code must be structured for high mutant coverage — small, pure methods; no logic in controllers; clear domain boundaries.
+- **Mutation testing (future):** Codebase will later be the subject of a public article series on mutation testing with the `mutant` gem — applied as a dedicated exercise after V1 ships, not as a V1 constraint.
 - **Dual purpose:** Personal use tool + open-source portfolio project demonstrating AI-native development practices.
 
 ## Constraints
@@ -48,7 +48,7 @@ A song is always playing within seconds of opening the app.
 - **Tech Stack**: Ruby on Rails, Hotwire + Turbo (frontend), RSpec (tests), Docker + Docker Compose (infra) — no deviations
 - **No DB (V1)**: All state is in-memory/session; Docker Compose must make adding PostgreSQL trivial for V2
 - **Mobile-first**: UI designed for mobile viewport first, desktop secondary
-- **Code quality**: TDD, clean code, mutation-testing-ready architecture required — this is portfolio and article material
+- **Code quality**: TDD, clean code, well-structured service objects — this is portfolio material
 
 ## Key Decisions
 
@@ -56,7 +56,7 @@ A song is always playing within seconds of opening the app.
 |----------|-----------|---------|
 | Discogs Search API (random page) over random ID | Enables genre filtering without extra API calls; random IDs can't be genre-filtered without fetching first | — Pending |
 | No DB in V1 | V1 has no persistence requirements; keeps infra simple while Docker Compose is structured for easy V2 expansion | — Pending |
-| RSpec over Minitest | Best pairing for `mutant` gem; industry standard | — Pending |
+| RSpec over Minitest | Industry standard; best ecosystem for Rails TDD | — Pending |
 | Session-only history | No auth/DB in V1; 10–20 song window is sufficient for the back-navigation UX | — Pending |
 
 ## Evolution
