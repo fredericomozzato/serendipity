@@ -7,9 +7,9 @@
 
 ### Infrastructure
 
-- [ ] **INFRA-01**: Developer can run the full app with `docker compose up` (Rails app container with named gem volume)
-- [ ] **INFRA-02**: Docker Compose is structured for zero-code-change PostgreSQL addition in V2 (commented `db` service + `DATABASE_URL` env var pattern)
-- [ ] **INFRA-03**: All V1 state is session-based — no database required
+- [x] **INFRA-01**: Developer can run the full app with `docker compose up` (Rails app container with named gem volume)
+- [x] **INFRA-02**: Docker Compose is structured for zero-code-change PostgreSQL addition in V2 (commented `db` service + `DATABASE_URL` env var pattern)
+- [x] **INFRA-03**: All V1 state is session-based — no database required
 
 ### Playback
 
@@ -79,9 +79,9 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 1 | Pending |
-| INFRA-02 | Phase 1 | Pending |
-| INFRA-03 | Phase 1 | Pending |
+| INFRA-01 | Phase 1 | Complete |
+| INFRA-02 | Phase 1 | Complete |
+| INFRA-03 | Phase 1 | Complete |
 | PLAY-01 | Phase 2 | Pending |
 | PLAY-02 | Phase 2 | Pending |
 | PLAY-03 | Phase 2 | Pending |
