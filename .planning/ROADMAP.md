@@ -29,7 +29,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. `bundle exec rspec` runs inside the container and exits green
   3. Docker Compose file contains a commented `db` service and a `DATABASE_URL` env var that require zero code changes to activate for V2
   4. All V1 state flows through Rails session (CookieStore) — no database queries are made anywhere in the app
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 01-01-PLAN.md — Rails 8 skeleton generation + Docker infrastructure (Dockerfile, Compose, entrypoint)
+- [ ] 01-02-PLAN.md — RSpec/VCR/WebMock/SimpleCov configuration + smoke spec
 
 ### Phase 2: Core Playback Loop
 **Goal**: Users experience the core value — a YouTube video of a random Discogs release starts playing automatically within seconds of opening the app
@@ -76,7 +79,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Infrastructure and Skeleton | 0/TBD | Not started | - |
+| 1. Infrastructure and Skeleton | 0/2 | Planning complete | - |
 | 2. Core Playback Loop | 0/TBD | Not started | - |
 | 3. Navigation and Discovery | 0/TBD | Not started | - |
 | 4. Retro UI Polish | 0/TBD | Not started | - |
