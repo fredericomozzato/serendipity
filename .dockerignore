@@ -1,0 +1,9 @@
+.git
+.gitignore
+log/*
+tmp/*
+!tmp/.keep
+.planning/
+.ruby-lsp/
+.playwright-mcp/
+node_modules/
