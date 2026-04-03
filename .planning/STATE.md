@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: "Completed 01-01-PLAN.md: Rails 8.1.3 skeleton + Docker infrastructure"
-last_updated: "2026-04-01T10:58:50.590Z"
+stopped_at: "Completed 01-02-PLAN.md: RSpec + VCR + WebMock + SimpleCov wired, smoke spec green"
+last_updated: "2026-04-03T12:52:27.492Z"
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -47,6 +47,7 @@ Plan: 2 of 2
 
 *Updated after each plan completion*
 | Phase 01 P01 | 6 | 2 tasks | 96 files |
+| Phase 01 P02 | 15 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -61,6 +62,7 @@ Recent decisions affecting current work:
 - [Phase 01]: Rails 8.1.3 used (latest available) over researched 8.0.5 — satisfies ~> 8.x constraint
 - [Phase 01]: Disabled migration_error check in development.rb — Rails 8.1 CheckPending middleware requires DB; no DB in V1
 - [Phase 01]: Named Docker volume serendipity_gems at /usr/local/bundle — gems persist across container rebuilds
+- [Phase 01]: NoDbFixtureSetup module overrides before_setup + after_teardown in rails_helper.rb — rspec-rails 8 always includes ActiveRecord::TestFixtures via FixtureSupport unconditionally; V1 no-DB apps must short-circuit both lifecycle hooks
 
 ### Pending Todos
 
@@ -74,6 +76,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-01T10:58:50.588Z
-Stopped at: Completed 01-01-PLAN.md: Rails 8.1.3 skeleton + Docker infrastructure
+Last session: 2026-04-03T12:52:27.490Z
+Stopped at: Completed 01-02-PLAN.md: RSpec + VCR + WebMock + SimpleCov wired, smoke spec green
 Resume file: None
