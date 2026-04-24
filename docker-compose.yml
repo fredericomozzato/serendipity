@@ -6,7 +6,7 @@ services:
       - .:/app
       - serendipity_gems:/usr/local/bundle
     ports:
-      - "3000:3000"
+      - "0.0.0.0:3000:3000"
     environment:
       - RAILS_ENV=development
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}

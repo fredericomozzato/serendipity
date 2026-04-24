@@ -1,0 +1,5 @@
+{
+  "enabledPlugins": {
+    "chef@sous-chef": true
+  }
+}

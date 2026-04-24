@@ -1,0 +1,6 @@
+[     713ms] [WARNING] This page is using the deprecated ResourceLoader module "mediawiki.ui.button".
+[1.41] Please use Codex. See migration guidelines: https://www.mediawiki.org/wiki/Codex/Migrating_from_MediaWiki_UI @ https://pt.wikipedia.org/w/load.php?lang=pt&modules=startup&only=scripts&raw=1&skin=vector-2022:11
+[     735ms] [LOG] [script-installer] loader iniciou @ https://pt.wikipedia.org/w/load.php?lang=pt&modules=ext.gadget.ElementosOcultaveis%2CFeedbackHighlight%2CMetacaixa%2CNewVillagePump%2CPagesForDeletion%2CReferenceTooltips%2CTitleRewrite%2CTopicon%2CWikiMiniAtlas%2Ccharinsert%2CrequestForAdminship%2Cscript-installer%2Cswitcher%2Cwikibugs&skin=vector-2022&version=pltwr:33
+[   78845ms] [WARNING] This page is using the deprecated ResourceLoader module "mediawiki.ui.button".
+[1.41] Please use Codex. See migration guidelines: https://www.mediawiki.org/wiki/Codex/Migrating_from_MediaWiki_UI @ https://pt.wikipedia.org/w/load.php?lang=pt&modules=startup&only=scripts&raw=1&skin=vector-2022:11
+[   78872ms] [LOG] [script-installer] loader iniciou @ https://pt.wikipedia.org/w/load.php?lang=pt&modules=ext.gadget.script-installer&skin=vector-2022&version=bs79p:0

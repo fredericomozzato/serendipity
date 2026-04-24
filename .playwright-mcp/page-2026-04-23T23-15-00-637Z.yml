@@ -1,0 +1,60 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - button "Rock" [ref=e5] [cursor=pointer]
+      - button "Electronic" [ref=e6] [cursor=pointer]
+      - button "Jazz" [ref=e7] [cursor=pointer]
+      - button "Hip Hop" [ref=e8] [cursor=pointer]
+      - button "Blues" [ref=e9] [cursor=pointer]
+      - button "Classical" [ref=e10] [cursor=pointer]
+      - button "Folk" [ref=e11] [cursor=pointer]
+      - button "World & Country" [ref=e12] [cursor=pointer]
+      - button "Funk / Soul" [ref=e13] [cursor=pointer]
+      - button "Latin" [ref=e14] [cursor=pointer]
+      - button "Reggae" [ref=e15] [cursor=pointer]
+      - button "Pop" [ref=e16] [cursor=pointer]
+      - button "Stage & Screen" [ref=e17] [cursor=pointer]
+      - button "Non-Music" [ref=e18] [cursor=pointer]
+      - button "Children's" [ref=e19] [cursor=pointer]
+      - button "Brass & Military" [ref=e20] [cursor=pointer]
+    - iframe [ref=e22]:
+      - generic [active] [ref=f15e1]:
+        - generic "YouTube Video Player" [ref=f15e3]
+        - generic [ref=f15e5]:
+          - generic:
+            - generic:
+              - button "Play video" [ref=f15e10] [cursor=pointer]:
+                - generic [ref=f15e13]:
+                  - img
+              - button "Hide player controls" [ref=f15e14] [cursor=pointer]
+              - generic [ref=f15e16]:
+                - generic [ref=f15e21]:
+                  - generic [ref=f15e22]:
+                    - link "Justin Rushmore - It's A Finger Lickin' Thang [FULL MIX]" [ref=f15e23] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=0Nr7Ssf0jHA
+                    - link "Tunes Tomb" [ref=f15e24] [cursor=pointer]:
+                      - /url: /channel/UCS4aV6_KMc9HgGfcMNNcNng
+                      - generic [ref=f15e25]: Tunes Tomb
+                  - generic [ref=f15e26]:
+                    - button "thumbnail-image" [ref=f15e55] [cursor=pointer]:
+                      - img "thumbnail-image" [ref=f15e56]
+                    - generic [ref=f15e29]:
+                      - generic: Tunes Tomb
+                      - generic: 11.4K subscribers
+                - generic [ref=f15e30]:
+                  - button "Share" [ref=f15e33] [cursor=pointer]:
+                    - generic [ref=f15e37]:
+                      - img
+                  - link "Watch on YouTube" [ref=f15e44] [cursor=pointer]:
+                    - /url: https://www.youtube.com/watch?v=0Nr7Ssf0jHA
+                    - generic [ref=f15e47]:
+                      - text: Watch on
+                      - img [ref=f15e49]:
+                        - generic [ref=f15e51]:
+                          - img
+    - generic [ref=e23]:
+      - heading "Justin Rushmore - It's A Finger Lickin' Thang [FULL MIX]" [level=2] [ref=e28]
+      - paragraph [ref=e29]: Various
+    - generic [ref=e25]:
+      - button "Previous Song" [disabled] [ref=e26]
+      - button "Next Random Song" [ref=e27] [cursor=pointer]
