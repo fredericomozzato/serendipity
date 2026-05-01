@@ -23,7 +23,7 @@ Scope:
 ---
 
 ### Slice 002 — Player skeleton with hardcoded videos
-STATUS: PENDING
+STATUS: IN_PROGRESS
 
 Delivers: user can load the app and cycle through a hardcoded set of YouTube videos using Next and Previous controls
 
